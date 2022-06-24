@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
     'rest_framework.authtoken',
+    'whitenoise.runserver_nostatic'
 
 ]
 REST_FRAMEWORK = {
@@ -63,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
@@ -113,6 +114,7 @@ else:
    }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
+
 DATABASES['default'].update(db_from_env)
 
 # Password validation
@@ -150,7 +152,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # configuring the location for media
 MEDIA_URL = '/media/'

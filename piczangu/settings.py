@@ -32,10 +32,10 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS=['198.211.99.20','0.0.0.0','localhost','127.0.0.1','piczangu.herokuapp.com']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -89,8 +89,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'piczangu.wsgi.application'
-
-
+#! Created postgresql-triangular-16285 as DATABASE_URL
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 if config('MODE')=="dev":

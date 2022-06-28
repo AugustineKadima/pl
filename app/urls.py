@@ -30,6 +30,9 @@ urlpatterns = [
     path('upload/portfoliophotos/', FileUploadView.as_view(), name='file-upload'),
     re_path('signup/photographer/new/', PhotographerSignupView.as_view()),
     re_path('signup/client/new/', ClientSignupView.as_view()),
+    # ! mpesa
+    path('', views.index, name='index'),
+    path('daraja/stk-push', views.stk_push_callback, name='mpesa_stk_push_callback'),
 
 
 ]

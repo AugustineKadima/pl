@@ -11,6 +11,25 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from .permissions import IsClientUser, IsPhotographerUser
 from rest_framework.permissions import AllowAny
+# ! Mpesa ************************
+from django_daraja.mpesa.core import MpesaClient
+
+# * start mpesa views
+def index(request):
+    cl = MpesaClient()
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    phone_number = '0798670839'
+    amount = 1
+    account_reference = 'reference'
+    transaction_desc = 'Description'
+    callback_url = request.build_absolute_uri(('https://mydomain.com/path'))
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)
+
+def stk_push_callback(request):
+        data = request.body
+        # You can do whatever you want with the notification received from MPESA here.
+# ! end of mpesa views
 
 class FileUploadView(generics.ListCreateAPIView):
     permission_classes = [AllowAny]

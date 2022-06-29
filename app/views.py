@@ -17,7 +17,9 @@ from django_daraja.mpesa.core import MpesaClient
 # * start mpesa views
 def index(request):
     cl = MpesaClient()
-    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt
+    # token - cl.access_token()
+
     phone_number = '0798670839'
     amount = 1
     account_reference = 'reference'
@@ -29,6 +31,24 @@ def index(request):
 def stk_push_callback(request):
         data = request.body
         # You can do whatever you want with the notification received from MPESA here.
+def ndex(request):
+        cl = MpesaClient()
+        phone_number = '0798670839'
+        amount = 1
+        transaction_desc = 'Business Payment Description'
+        occassion = 'Test business payment occassion'
+        callback_url = request.build_absolute_uri(('mpesa_business_payment_callback'))
+        response = cl.business_payment(phone_number, amount, transaction_desc, callback_url, occassion)
+        return HttpResponse(response)
+def b2c(request,self):
+        phone_number = '0798670839'
+        amount = 1
+        transaction_desc = 'Description'
+        occassion = 'Occassion'
+        callback_url = request.build_absolute_uri(('https://mydomain.com/path'))
+        response = self.cl.business_payment(phone_number, amount, transaction_desc, self.callback_url, occassion)
+        return HttpResponse(response)
+
 # ! end of mpesa views
 
 class FileUploadView(generics.ListCreateAPIView):
